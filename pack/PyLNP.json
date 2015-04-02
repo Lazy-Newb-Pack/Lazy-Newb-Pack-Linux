@@ -1,0 +1,32 @@
+{
+	"folders": [
+		["Main folder",""],
+		["LNP folder","LNP"],
+		["Dwarf Fortress folder","<df>"],
+		["-","-"],
+		["Savegame folder","<df>/data/save"],
+		["Utilities folder","LNP/Utilities"],
+		["Graphics folder","LNP/Graphics"],
+		["Init folder","<df>/data/init"]
+	],
+	"links": [
+		["Donate to Dwarf Fortress","http://www.bay12games.com/support.html"],
+		["DF Homepage","http://www.bay12games.com/dwarves/"],
+		["-","-"],
+		["Lazy Newb Pack Linux","https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux"],
+		["CptnDuck's Tutorial vids","https://www.youtube.com/playlist?list=PL06686270DA5FF439"],
+		["DF Wiki","http://dwarffortresswiki.org/"],
+		["DF Reddit <3","http://reddit.com/r/dwarffortress/"],
+		["DF Forums","http://www.bay12forums.com/smf/"]
+	],
+	"hideUtilityPath": true,
+	"hideUtilityExt": true,
+	"updates": {
+		"dffdID": "",
+		"packVersion": "",
+		"checkURL": "",
+		"versionRegex": "",
+		"downloadURL": "",
+		"directURL": ""
+	}
+}

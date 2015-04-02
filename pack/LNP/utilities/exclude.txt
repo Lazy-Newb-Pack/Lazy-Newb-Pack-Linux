@@ -1,0 +1,16 @@
+File Exlcusion List
+Any file name inside square brackets will not show up in LNP's utilities list.
+
+SoundSense Exclusions
+[soundSense.jar]
+[jl1.0.jar]
+[mp3spi1.9.4.jar]
+[jogg-0.0.7.jar]
+[jorbis-0.0.15.jar]
+[vorbisspi1.0.3.jar]
+[tritonus_share.jar]
+[autoUpdater.jar]
+[commons-codec-1.4.jar]
+[jansi-1.8.jar]
+[mp3spi1.9.5.jar]
+[jl1.0.1.jar]

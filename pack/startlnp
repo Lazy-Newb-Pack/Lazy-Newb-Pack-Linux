@@ -1,0 +1,15 @@
+#!/bin/sh
+LNP_DIR=$(dirname "$0")
+cd "${LNP_DIR}"
+
+#Check whether Dwarf Therapist can read from DF memory:
+dt_capabilities=$(/sbin/getcap LNP/utilities/dwarf_therapist/DwarfTherapist |cut -f2 -d"=")
+dt_capabilities=${dt_capabilities:=0}
+if [ ${dt_capabilities} != "cap_sys_ptrace+eip" ]; then
+        msg="Enable Dwarf Therapist to read from Dwarf Fortress memory"
+        xterm -e "echo $msg;sudo setcap cap_sys_ptrace=eip LNP/utilities/dwarf_therapist/DwarfTherapist"
+fi
+
+
+#run Lazy Newb Pack
+./PyLNP
