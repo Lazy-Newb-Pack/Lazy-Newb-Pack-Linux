@@ -4,8 +4,20 @@
 # and sets up env variables as workaround for use by the
 # df/dfhack scripts.
 
+t_bold="$(tput bold 2>/dev/null || printf '\033[1m')"
+t_green="$(tput setaf 2 2>/dev/null || printf '\033[0;32m')"
+t_reset="$(tput sgr 0 2>/dev/null || printf '\033[0m')"
 dlog() {
-    printf "\033[0;32m[distro_fixes]\033[0;00m $1 $2\n"
+    local color=0
+    if [ "$1" = "WARN" ] || [ "$1" = "WARNING" ]; then
+        color=3
+    elif [ "$1" = "INFO" ]; then
+        color=6
+    elif [ "$1" = "ERR" ] || [ $1 = "ERROR" ]; then
+        color=1
+    fi
+    color="$(tput setaf $color 2>/dev/null || printf '\033[3'$color'm')"
+    printf "${t_green}${t_bold}[distro_fixes] ${color}$1${t_reset} $2\n"
 }
 
 find_zlib() {
@@ -31,11 +43,11 @@ find_zlib() {
 }
 
 if [ "$#" -lt 1 ]; then
-    echo "[distro_fixes.sh] you must provide DF_DIR as an argument."
+    dlog ERROR "you must provide DF_DIR as an argument."
     exit 1
 fi
 
-dlog "INFO" "Checking whether any ARCH/distro specific fixes are required..."
+dlog "INFO" "Checking whether any distro specific fixes are required..."
 
 # find df bin relative to location of this shell script
 DF_BIN_LOCATION="$1/libs/Dwarf_Fortress"
