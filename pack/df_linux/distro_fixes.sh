@@ -5,7 +5,7 @@
 # df/dfhack scripts.
 
 dlog() {
-    echo -e "\033[0;32m[distro_fixes]\033[0;00m $1 $2"
+    printf "\033[0;32m[distro_fixes]\033[0;00m $1 $2\n"
 }
 
 if [ "$#" -lt 1 ]; then
