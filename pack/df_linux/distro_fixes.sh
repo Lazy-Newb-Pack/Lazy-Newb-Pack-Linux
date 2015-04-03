@@ -8,6 +8,28 @@ dlog() {
     echo -e "\033[0;32m[distro_fixes]\033[0;00m $1 $2"
 }
 
+find_zlib() {
+    for hint in "$@" /usr/lib32 /lib32 /usr/lib/mesa-diverted/i386-linux-gnu /usr/lib ; do
+        if [ -f "$hint" ]; then
+            ZLIB_PATH="$hint"
+            break
+        elif [ -d "$hint" ]; then
+            for file in libz.so libz.so.1 libz.so.1.2.5 libz.so.1.1.3 libz.dylib ; do
+                if [ -f "$hint/$file" ]; then
+                    ZLIB_PATH="$hint/$file"
+                    break
+                fi
+            done
+            if [ -z "$ZLIB_PATH" ]; then
+                ZLIB_PATH=$(ls "$hint"/libz.* 2>/dev/null | head -n1)
+            fi
+        fi
+        if [ -n "$ZLIB_PATH" ]; then
+            break
+        fi
+    done
+}
+
 if [ "$#" -lt 1 ]; then
     echo "[distro_fixes.sh] you must provide DF_DIR as an argument."
     exit 1
@@ -57,41 +79,36 @@ dlog "INFO" "DF_BIN_LOCATION: $DF_BIN_LOCATION"
 # Some threads suggest png files should also be converted to bmp as a fix
 # but I haven't found this necessary if LD_PRELOAD is properly set (on fedora).
 
-if [ x"$DF_ARCH" == x'32-bit' ] && [ x"$ARCH" == x'x86_64' ]; then
+if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     dlog "INFO" "32 bit df on $OS/64bit detected"
     # Fedora 21/64-bit is tested
-    if [ x"$OS" == x'Fedora' ]; then
-        export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib/libz.so.1";
-        dlog "INFO" "Setting LD_PRELOAD to $PRELOAD_LIB"
+    if [ x"$OS" = x'Fedora' ]; then
+        find_zlib /usr/lib/libz.so.1 /usr/lib
     # Gentoo 2.2
-    elif [ x"$OS" == x'Gentoo' ]; then
-        export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/lib32/libz.so.1";
-        dlog "INFO" "Setting LD_PRELOAD to $PRELOAD_LIB"
-    elif [ x"$OS" == x'Arch' ]; then
-        export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib32/libz.so";
-        dlog "INFO" "Setting LD_PRELOAD to $PRELOAD_LIB"
-    elif [ x"$OS" == x'Debian' ]; then
+    elif [ x"$OS" = x'Gentoo' ]; then
+        find_zlib /lib32/libz.so.1 /lib32
+    elif [ x"$OS" = x'Arch' ]; then
+        find_zlib /usr/lib32/libz.so /usr/lib32
+    elif [ x"$OS" = x'Debian' ]; then
         export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}/usr/lib/mesa-diverted/i386-linux-gnu"
-        if [ -f "/usr/lib32/libz.so" ]; then
-            export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib32/libz.so"
-        else
-            zlib32=$(ls /usr/lib32/libz.so.* | head -n1)
-            if [ -f "$zlib32" ]; then
-                export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}$zlib32"
-            else
-                dlog "WARN" "Could not find a 32-bit zlib"
-            fi
-        fi
-        dlog "INFO" "Setting LD_PRELOAD to $PRELOAD_LIB"
-        dlog "INFO" "Setting LD_LIBRARY_PATH to $LD_LIBRARY_PATH"
+        find_zlib /usr/lib32/libz.so /usr/lib32
     # Add your distro here...
-    # elif [ x"$OS" == x'MyFooDistro' ]; then
-    #     export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}<abspath_to_32bit_libz>";
-    #     dlog "INFO" "32 bit df on $OS/64bit detected. Will set LD_PRELOAD to $PRELOAD_LIB...."
+    # elif [ x"$OS" = x'MyFooDistro' ]; then
+    #     find_zlib hint [hint]...
     else
         dlog "WARN" "32bit 'Dwarf_Fortress' on unhandled 64bit OS detected. If you get 'missing file' errors, please open an issue on Github: https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/issues."
+        find_zlib
+    fi
+
+    if [ -n "$ZLIB_PATH" ]; then
+        export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}$ZLIB_PATH"
+        dlog INFO "Attempting to use zlib at $ZLIB_PATH"
+    else
+        dlog WARN "Could not find a 32-bit zlib"
     fi
 
 fi
 
+dlog "INFO" "PRELOAD_LIB: $PRELOAD_LIB"
+dlog "INFO" "LD_LIBRARY_PATH: $LD_LIBRARY_PATH"
 dlog "INFO" "Done"
