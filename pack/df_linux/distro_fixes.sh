@@ -80,6 +80,7 @@ elif [ -e /etc/os-release ]; then
 else
     dlog "WARN" "OS not successfully detected"
 fi
+OS=$(echo $OS | cut -d' ' -f 1)
 
 # Report Stuff
 
