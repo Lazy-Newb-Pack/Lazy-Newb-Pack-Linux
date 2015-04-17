@@ -74,6 +74,11 @@ if [ -e "/usr/bin/lsb_release" ]; then
 elif [ -e  /etc/fedora-release ]; then
     OS="Fedora"
     VER=$(cat /etc/fedora-release | grep -Po '\d+')
+elif [ -e /etc/os-release ]; then
+    OS=$(grep \^NAME\= /etc/os-release | cut -d\= -f 2- | tr -d \")
+    VER=$(grep \^VERSION\= /etc/os-release | cut -d\= -f 2- | tr -d \")
+else
+    dlog "WARN" "OS not successfully detected"
 fi
 
 # Report Stuff
