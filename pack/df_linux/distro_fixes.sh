@@ -74,7 +74,13 @@ if [ -e "/usr/bin/lsb_release" ]; then
 elif [ -e  /etc/fedora-release ]; then
     OS="Fedora"
     VER=$(cat /etc/fedora-release | grep -Po '\d+')
+elif [ -e /etc/os-release ]; then
+    OS=$(grep \^NAME\= /etc/os-release | cut -d\= -f 2- | tr -d \")
+    VER=$(grep \^VERSION\= /etc/os-release | cut -d\= -f 2- | tr -d \")
+else
+    dlog "WARN" "OS not successfully detected"
 fi
+OS=$(echo $OS | cut -d' ' -f 1)
 
 # Report Stuff
 
@@ -101,6 +107,11 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
         find_zlib /lib32/libz.so.1 /lib32
     elif [ x"$OS" = x'Arch' ]; then
         find_zlib /usr/lib32/libz.so /usr/lib32
+        if [ -e "/usr/lib32/libstdc++.so.6" ]; then
+            export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib32/libstdc++.so.6"
+        else
+            dlog WARN "Could not find /usr/lib32/libstdc++.so.6"
+        fi
     elif [ x"$OS" = x'Debian' ]; then
         export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}/usr/lib/mesa-diverted/i386-linux-gnu"
         find_zlib /usr/lib32/libz.so /usr/lib32
