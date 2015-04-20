@@ -104,6 +104,8 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     elif [ x"$OS" = x'Debian' ]; then
         export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}/usr/lib/mesa-diverted/i386-linux-gnu"
         find_zlib /usr/lib32/libz.so /usr/lib32
+    elif [ x"$OS" = x'openSUSE project' ]; then
+        find_zlib /lib/libz.so /lib
     # Add your distro here...
     # elif [ x"$OS" = x'MyFooDistro' ]; then
     #     find_zlib hint [hint]...
