@@ -17,7 +17,7 @@ dlog() {
         color=1
     fi
     color="$(tput setaf $color 2>/dev/null || printf '\033[3'$color'm')"
-    printf "${t_green}${t_bold}[distro_fixes] ${color}$1${t_reset} $2\n"
+    printf "${t_green}${t_bold}[distro_fixes] ${color}[$1]${t_reset} $2\n"
 }
 
 find_zlib() {
@@ -80,7 +80,7 @@ elif [ -e /etc/os-release ]; then
 else
     dlog "WARN" "OS not successfully detected"
 fi
-OS=$(echo $OS | cut -d' ' -f 1)
+OS=$(echo $OS | cut -d' ' -f 1 | tr '[:upper:]' '[:lower:]')
 
 # Report Stuff
 
@@ -100,25 +100,25 @@ dlog "INFO" "DF_BIN_LOCATION: $DF_BIN_LOCATION"
 if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     dlog "INFO" "32 bit df on $OS/64bit detected"
     # Fedora 21/64-bit is tested
-    if [ x"$OS" = x'Fedora' ]; then
+    if [ x"$OS" = x'fedora' ]; then
         find_zlib /usr/lib/libz.so.1 /usr/lib
     # Gentoo 2.2
-    elif [ x"$OS" = x'Gentoo' ]; then
+    elif [ x"$OS" = x'gentoo' ]; then
         find_zlib /lib32/libz.so.1 /lib32
-    elif [ x"$OS" = x'Arch' ]; then
+    elif [ x"$OS" = x'arch' ]; then
         find_zlib /usr/lib32/libz.so /usr/lib32
         if [ -e "/usr/lib32/libstdc++.so.6" ]; then
             export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib32/libstdc++.so.6"
         else
             dlog WARN "Could not find /usr/lib32/libstdc++.so.6"
         fi
-    elif [ x"$OS" = x'Debian' ]; then
+    elif [ x"$OS" = x'debian' ]; then
         export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}/usr/lib/mesa-diverted/i386-linux-gnu"
         find_zlib /usr/lib32/libz.so /usr/lib32
-    elif [ x"$OS" = x'openSUSE project' ]; then
+    elif [ x"$OS" = x'opensuse' ]; then
         find_zlib /lib/libz.so /lib
     # Add your distro here...
-    # elif [ x"$OS" = x'MyFooDistro' ]; then
+    # elif [ x"$OS" = x'myfoodistro' ]; then
     #     find_zlib hint [hint]...
     else
         dlog "WARN" "32bit 'Dwarf_Fortress' on unhandled 64bit OS detected. If you get 'missing file' errors, please open an issue on Github: https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/issues."
