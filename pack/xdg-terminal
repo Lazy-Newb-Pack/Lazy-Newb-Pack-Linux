@@ -334,7 +334,7 @@ terminal_kde()
     terminal_exec=`which $terminal 2>/dev/null`
 
     if [ -x "$terminal_exec" ]; then
-        if [ x"$1" == x"" ]; then
+        if [ -z "$1" ]; then
             nohup $terminal_exec > /dev/null &
         else
             nohup $terminal_exec -e "$1" > /dev/null &
@@ -361,10 +361,10 @@ terminal_gnome()
     terminal_exec=`which $term_exec 2>/dev/null`
 
     if [ -x "$terminal_exec" ]; then
-        if [ x"$1" == x"" ]; then
+        if [ -z "$1" ]; then
             nohup $terminal_exec > /dev/null &
         else
-            if [ x"$term_exec_arg" == x"" ]; then
+            if [ -z "$term_exec_arg" ]; then
                 nohup $terminal_exec "$1" > /dev/null &
             else
                 nohup $terminal_exec "$term_exec_arg" "$1" > /dev/null &
@@ -383,7 +383,7 @@ terminal_gnome()
 
 terminal_xfce()
 {
-    if [ x"$1" == x"" ]; then
+    if [ -z "$1" ]; then
         nohup exo-open --launch TerminalEmulator  > /dev/null &
     else
         nohup exo-open --launch TerminalEmulator "$1" > /dev/null &
@@ -399,14 +399,14 @@ terminal_xfce()
 terminal_generic()
 {
     # if $TERM is not set, try xterm
-    if [ x"$TERM" == x"" ]; then
+    if [ -z "$TERM" ]; then
         TERM=xterm
     fi
 
     terminal_exec=`which $TERM 2>/dev/null`
 
     if [ -x "$terminal_exec" ]; then
-			  if [ x"$1" == x"" ]; then
+        if [ -z "$1" ]; then
             nohup $terminal_exec > /dev/null &
         else
             nohup $terminal_exec "-e" "$1" > /dev/null &
@@ -442,7 +442,7 @@ terminal_mate()
     terminal_exec=`which mate-terminal 2>/dev/null`
 
     if [ -x "$terminal_exec" ]; then
-        if [ x"$1" == x"" ]; then
+        if [ -z "$1" ]; then
             nohup $terminal_exec > /dev/null &
         else
             nohup $terminal_exec "$term_exec_arg" "$1" > /dev/null &
@@ -462,8 +462,6 @@ terminal_i3()
 {
     nohup i3-sensible-terminal -e "$1" > /dev/null &
 }
-
-#[ x"$1" != x"" ] || exit_failure_syntax
 
 command=
 while [ $# -gt 0 ] ; do
@@ -486,9 +484,9 @@ done
 
 detectDE
 
-if [ x"$DE" = x"" ]; then
+if [ -z "$DE" ]; then
     # if TERM variable is not set, try xterm
-    if [ x"$TERM" = x"" ]; then
+    if [ -z "$TERM" ]; then
         TERM=xterm
     fi
     DE=generic
