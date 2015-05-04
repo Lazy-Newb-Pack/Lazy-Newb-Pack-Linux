@@ -37,7 +37,8 @@ old_tty_settings=$(stty -g)
 # >>> LNP modification:
 
 #apply any ARCH/distro fixes
-. "./distro_fixes.sh" "${DF_DIR}"
+export DF_DIR
+. "./distro_fixes.sh"
 
 # <<< LNP modification:
 
