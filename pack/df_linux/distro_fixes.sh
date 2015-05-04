@@ -56,9 +56,9 @@ if [ ! -f $DF_BIN_LOCATION ]; then
     dlog "WARN" "did not find df binary at $DF_BIN_LOCATION"
 fi
 
-pcre_grep() {
-    if which egrep; then
-        egrep "$@"
+pcre_ogrep() {
+    if which -s egrep; then
+        egrep -o "$@"
     else
         grep -Po "$@"
     fi
@@ -68,7 +68,7 @@ pcre_grep() {
 OS=$(uname -s)
 ARCH=$(uname -m)
 VER=$(uname -r)
-DF_ARCH=$(file "$DF_BIN_LOCATION" | pcre_grep '(32|64)-bit')
+DF_ARCH=$(file "$DF_BIN_LOCATION" | pcre_ogrep '(32|64)-bit')
 
 # this needs to be picked up by df/dfhack and included in LD_PRELOAD
 # empty by default (unless set manually in the shell env)
