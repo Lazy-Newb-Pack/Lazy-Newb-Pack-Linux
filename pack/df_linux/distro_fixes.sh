@@ -133,13 +133,17 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
         find_zlib
     fi
 
-    if [ -n "$ZLIB_PATH" ]; then
-        export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}$ZLIB_PATH"
-        dlog INFO "Attempting to use zlib at $ZLIB_PATH"
-    else
+    if [ -z "$ZLIB_PATH" ]; then
         dlog WARN "Could not find a 32-bit zlib"
     fi
 
+elif [ x"$DF_ARCH" = x'32-bit' ]; then
+    find_zlib
+fi
+
+if [ -n "$ZLIB_PATH" ]; then
+    export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}$ZLIB_PATH"
+    dlog INFO "Attempting to use zlib at $ZLIB_PATH"
 fi
 
 dlog "INFO" "PRELOAD_LIB: $PRELOAD_LIB"
