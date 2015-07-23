@@ -113,7 +113,7 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     # Gentoo 2.2
     elif [ x"$OS" = x'gentoo' ]; then
         find_zlib /lib32/libz.so.1 /lib32
-    elif [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ]; then
+    elif [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ]; then
         find_zlib /usr/lib32/libz.so /usr/lib32
         if [ -e "/usr/lib32/libstdc++.so.6" ]; then
             export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib32/libstdc++.so.6"
