@@ -1,5 +1,6 @@
 #!/bin/sh
-LNP_PATH=$(readlink -f "$0")
+LNP_PATH=$(readlink -f "$0" 2>/dev/null || readlink "$0" 2>/dev/null)
+LNP_PATH="${LNP_PATH:-$0}"
 LNP_DIR=$(dirname "$LNP_PATH")
 cd "${LNP_DIR}"
 exename=$(basename "$0")
@@ -18,6 +19,11 @@ Download a complete LNP package from:
     - https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/releases
     - http://lazynewbpack.com/linux/
 EOF
+fi
+
+if [ ! -d df_linux ]; then
+    warn "df_linux/ not found (working directory incorrect?)"
+    echo "working directory: $(pwd)"
 fi
 
 if [ -x /sbin/getcap ] && [ -x /sbin/setcap ]; then
