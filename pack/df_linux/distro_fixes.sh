@@ -111,7 +111,7 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     if [ x"$OS" = x'fedora' ]; then
         find_zlib /usr/lib/libz.so.1 /usr/lib
     # Gentoo 2.2
-    elif [ x"$OS" = x'gentoo' ]; then
+    elif [ x"$OS" = x'gentoo' ] || [ x"$OS" = x'sabayon' ]; then
         find_zlib /lib32/libz.so.1 /lib32
     elif [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ]; then
         find_zlib /usr/lib32/libz.so /usr/lib32
