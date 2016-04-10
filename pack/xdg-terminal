@@ -399,23 +399,26 @@ terminal_xfce()
 terminal_generic()
 {
     # if $TERM is not set, try xterm
-    if [ -z "$TERM" ]; then
-        TERM=xterm
+    if [ -z "$TERM" ] || [ `echo $TERM | cut -c 1-4` == "tmux" ] || [ `echo $TERM | cut -c 1-6` == "screen" ]; then
+        terminal_exec=`which xterm`
+    
+    elif [ `echo $TERM | cut -c 1-6` == "rxvt-u" ]; then
+	terminal_exec=`which urxvt`
+    else
+	terminal_exec=`which $TERM 2>/dev/null`
     fi
-
-    terminal_exec=`which $TERM 2>/dev/null`
-
+    
     if [ -x "$terminal_exec" ]; then
         if [ -z "$1" ]; then
-            nohup $terminal_exec > /dev/null &
+	    nohup $terminal_exec > /dev/null &
         else
-            nohup $terminal_exec "-e" "$1" > /dev/null &
+	    nohup $terminal_exec "-e" "$1" > /dev/null &
         fi
 
         if [ $? -eq 0 ]; then
-            exit_success
+	    exit_success
         else
-            exit_failure_operation_failed
+	    exit_failure_operation_failed
         fi
     else
         exit_failure_operation_impossible "configured terminal program '$TERM' not found or not executable"
