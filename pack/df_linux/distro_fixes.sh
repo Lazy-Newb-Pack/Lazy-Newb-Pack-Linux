@@ -21,7 +21,7 @@ dlog() {
 }
 
 find_zlib() {
-    for hint in "$@" /usr/lib32 /lib32 /usr/lib/mesa-diverted/i386-linux-gnu /usr/lib ; do
+    for hint in "$@" /usr/lib32 /lib32 /usr/lib/i386-linux-gnu /usr/lib/mesa-diverted/i386-linux-gnu /usr/lib ; do
         if [ -f "$hint" ]; then
             ZLIB_PATH="$hint"
             break
