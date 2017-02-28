@@ -26,17 +26,19 @@ if [ ! -d df_linux ]; then
     echo "working directory: $(pwd)"
 fi
 
-if [ -x /sbin/getcap ] && [ -x /sbin/setcap ]; then
-    #Check whether Dwarf Therapist can read from DF memory:
-    dt_capabilities=$(/sbin/getcap LNP/utilities/dwarf_therapist/DwarfTherapist |cut -f2 -d"="|tr -d " ")
-    dt_capabilities=${dt_capabilities:=0}
-    if [ ${dt_capabilities} != "cap_sys_ptrace+eip" ]; then
-        msg="Enable Dwarf Therapist to read from Dwarf Fortress memory"
-        xterm -e "echo $msg;sudo /sbin/setcap cap_sys_ptrace=eip LNP/utilities/dwarf_therapist/DwarfTherapist"
-    fi
-else
-    warn "Could not find /sbin/getcap and/or /sbin/setcap"
+#check whether dwarf therapist exists in LNP/utilities
+if [ -d LNP/utilities/dwarf_therapist ]; then
+  if [ -x /sbin/getcap ] && [ -x /sbin/setcap ]; then
+      #Check whether Dwarf Therapist can read from DF memory:
+      dt_capabilities=$(/sbin/getcap LNP/utilities/dwarf_therapist/DwarfTherapist |cut -f2 -d"="|tr -d " ")
+      dt_capabilities=${dt_capabilities:=0}
+      if [ ${dt_capabilities} != "cap_sys_ptrace+eip" ]; then
+          msg="Enable Dwarf Therapist to read from Dwarf Fortress memory"
+          xterm -e "echo $msg;sudo /sbin/setcap cap_sys_ptrace=eip LNP/utilities/dwarf_therapist/DwarfTherapist"
+      fi
+  else
+      warn "Could not find /sbin/getcap and/or /sbin/setcap"
+  fi
 fi
-
 #run Lazy Newb Pack
 ./PyLNP || warn "Failed to start PyLNP"
