@@ -4,6 +4,8 @@
 # and sets up env variables as workaround for use by the
 # df/dfhack scripts.
 
+export LD_LIBRARY_PATH=""
+
 t_bold="$(tput bold 2>/dev/null || printf '\033[1m')"
 t_green="$(tput setaf 2 2>/dev/null || printf '\033[0;32m')"
 t_reset="$(tput sgr 0 2>/dev/null || printf '\033[0m')"
