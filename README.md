@@ -91,6 +91,7 @@ See [the WIKI](https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/wiki/Commo
 * Armok Vision 0.16.2
 * Legends Browser 1.12.2
 
+***
 
 ### Release notes for 0.43.05-r1 (June 8, 2017):
 ##### Major changes over previous revision:
