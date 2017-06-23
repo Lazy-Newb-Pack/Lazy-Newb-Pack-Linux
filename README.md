@@ -28,8 +28,8 @@ When first launching a new version of the LNP, you'll be asked if you want to im
      * [Dwarf Therapist v37 (DanFritz's fork)](https://github.com/DanFritz/Dwarf-Therapist) (**compiled with qt4.8.7**)
      * [Soundsense r2016-1](http://df.zweistein.cz/soundsense/)
      * [SoundCenSe GTK 1.4.2](http://www.bay12forums.com/smf/index.php?topic=159567.0) (**Requires Mono, go [HERE](http://www.mono-project.com/download/#download-lin) for install instructions**)
-     * [qfconvert 2.04](http://www.joelpt.net/quickfort/)
-     * [DF Announcement Filter 1.01](http://www.bay12forums.com/smf/index.php?topic=130030.0)
+     * [qfconvert 2.04](http://www.joelpt.net/quickfort/) (**See ./LNP/about/qfconvert.md for usage instructions**)
+     * [DF Announcement Filter 1.01](http://www.bay12forums.com/smf/index.php?topic=130030.0) (**Requires Java**)
      * [Legends Browser 1.12.2](http://www.bay12forums.com/smf/index.php?topic=155307.0) (**Requires Java 8**)
      * [Armok Vision 0.16.2](http://www.bay12forums.com/smf/index.php?topic=146473.0)
  * Graphics (Now using [fricy's Updated tilesets](http://www.bay12forums.com/smf/index.php?topic=155882)!)
@@ -55,12 +55,12 @@ Install required packages
 
 For Debian / Ubuntu
 ```
-sudo apt-get install default-jre libsdl1.2debian:i386 libsdl-image1.2:i386 libsdl-ttf2.0-0:i386 libglu1-mesa:i386 libgtk2.0-0:i386 libopenal1:i386 libjpeg62-turbo:i386 wget coreutils tar xterm sed python bzip2 qtchooser libqt4-script libqt4-scripttools libqt5script5 libqt5scripttools5 libqxt-core0 libqxt-gui0
+sudo apt-get install default-jre libsdl1.2debian libsdl-image1.2 libsdl-ttf2.0-0 libglu1-mesa libgtk2.0-0 libopenal1 libjpeg62 wget coreutils tar xterm sed python bzip2 qtchooser libqt4-script libqt4-scripttools libqt5script5 libqt5scripttools5 libqxt-core0 libqxt-gui0
 ```
 
-For Fedora (21)
+For Fedora (25)
 ```
-yum install SDL.i686 SDL_image.i686 SDL_ttf.i686 mesa-libGLU.i686 gtk2.i686 zlib.i686 openal-soft.i686 xterm python qt qt-x11 bzip2 xorg-x11-fonts-Type1
+yum install SDL SDL_image SDL_ttf mesa-libGLU gtk2 zlib openal-soft xterm python qt qt-x11 bzip2 xorg-x11-fonts-Type1
 ```
 
 ## Tested On
@@ -69,16 +69,29 @@ yum install SDL.i686 SDL_image.i686 SDL_ttf.i686 mesa-libGLU.i686 gtk2.i686 zlib
 ## Common Issues
 See [the WIKI](https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/wiki/Common-Errors).
 
-******************************************************
+***
 ## Linux LNP Changelog
-### Release notes for 0.43.05-r2 (June 8, 2017):
+### Release notes for 0.43.05-r2 (???, 2017)
 ##### Major changes over previous revision:
+
+##### Minor changes over previous revision:
+* Fixed duplicate axes in some embark profiles
+* 
+
+### Release notes for 0.43.05-r2 (June 23, 2017):
+##### Major changes over previous revision:
+
 * Compiled Dwarf Therapist with Qt4 for better compatability
-* Updated Legends Browser to 1.12.2.
+* Updated Legends Browser to 1.12.2
 * Updated PyLNP to 0.12b
 
 ##### Minor changes over previous revision:
-* Began building README.md (this file) to assist in using the pack and improve record keeping of the maintainer(s)
+* Began distributing with a README file for version history, release notes, troubleshooting tips, etc
+* Reverted Phoebus font back to default setting of Jecobus_10x16
+* Removed problematic onLoad.init from graphics packs (known to cause issues, see report **[HERE](http://www.bay12forums.com/smf/index.php?topic=126076.msg7486347#msg7486347)**)
+* Changed macro key delay from from 15 ms to 0 ms to speed up macros (As PeridexisErrant pointed out with the Windows LNP)
+* Fixed Dwarf Therapist script to better detect its location
+* Changed Legends Browser to call a script rather than the .jar file directly.  Some distros (Fedora at least) don't allow the launching of .jar files directly
 
 ##### Utilities included:
 * PyLNP 0.12b
@@ -92,7 +105,6 @@ See [the WIKI](https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/wiki/Commo
 * Legends Browser 1.12.2
 
 ***
-
 ### Release notes for 0.43.05-r1 (June 8, 2017):
 ##### Major changes over previous revision:
 * Updated DFHack to 0.43.05-r1.
@@ -248,12 +260,13 @@ Next up we'll be doing more bug fix releases to make sure we have a vaguely pres
 * XML export now has the exact site rectangle
 
 ## Credits & Special Thanks
+ * [@algorithman](https://github.com/Algorithman/SoundCenSe/releases) Writer and maintainer of SoundCenSe GTK, the C#/GTK port of @Zweistein's SoundSense utility
  * [@andrewd18](https://github.com/andrewd18/) Andrew Dorney made the awesome linux LNP installer script
  * [@amfournda](https://github.com/amfournda/) Created a great gentoo fix script included in the pack
  * [@beaubouchard](https://github.com/BeauBouchard) Previous maintainer of this package
  * [@Captain Duck](https://www.youtube.com/playlist?list=PL0sBhCMFBvPlF7wG7OH-NFQKMeCQiS8aM) Just all around great guy, watch his Dwarf Fortress Tutorial series and subscribe!
  * [@CarterScottM](https://www.github.com/CarterScottM) Current maintainer of the Linux Pack
- * [@DanFritz](https://github.com/DanFritz/) His fork of Dwarf Therapist was used to compile DT with qt4
+ * [@DanFritz](https://github.com/DanFritz/) His fork of Dwarf Therapist was used to compile DT with QT4
  * [@Daveralph](https://github.com/daveralph1234/LazyNewbPack/) continued working on LNP after Dricus
  * [@Dricus](https://github.com/Dricus)   Dirk Groot is the creator of the cross platform LNP port
  * [@Dwimenor](https://github.com/Dwimenor/) Created a workaround for LNP, as well as providing linux support
@@ -261,7 +274,7 @@ Next up we'll be doing more bug fix releases to make sure we have a vaguely pres
  * [@Hello71](https://github.com/Hello71) Hello71's fork of Dwarf Therapist was used in previous versions of the pack
  * [@Japa](http://www.bay12forums.com/smf/index.php?topic=146473.0) Creator/maintainer of Armok Vision
  * [@joelpt](http://www.joelpt.net/quickfort/) Joel Thornton Created Quickfort 2.x
- * [@lethosor](https://github.com/lethosor) Works on DFhack, DFwiki, and maintainer of the LNP
+ * [@lethosor](https://github.com/lethosor) Works on DFhack, DFwiki, and many other Dwarf Fortress related projects
  * [@LucasUP](https://github.com/LucasUP/) Lucas Paquette made the original Windows LNP
  * [@miffedmap](https://github.com/miffedmap) Actively perfecting cross distro compatibility
  * [@mifki](https://github.com/mifki) Text Will Be Text dfmultiscroll and webfort

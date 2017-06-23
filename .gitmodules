@@ -1,3 +1,3 @@
 [submodule "pack/LNP"]
 	path = pack/LNP
-	url = https://github.com/Lazy-Newb-Pack/LNP-shared-core
+	url = https://github.com/Lazy-Newb-Pack/LNP-shared-core.git
