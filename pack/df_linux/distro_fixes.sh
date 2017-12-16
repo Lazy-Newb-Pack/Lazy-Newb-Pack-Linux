@@ -115,7 +115,7 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     # Gentoo 2.2
     elif [ x"$OS" = x'gentoo' ] || [ x"$OS" = x'sabayon' ]; then
         find_zlib /lib32/libz.so.1 /lib32
-    elif [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ]; then
+    elif [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ] || [ x"$OS" = x'chakra' ]; then
         find_zlib /usr/lib32/libz.so /usr/lib32
         if [ -e "/usr/lib32/libstdc++.so.6" ]; then
             export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib32/libstdc++.so.6"
@@ -138,9 +138,8 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     if [ -z "$ZLIB_PATH" ]; then
         dlog WARN "Could not find a 32-bit zlib"
     fi
-
 elif [ x"$DF_ARCH" = x'64-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
-    if [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ]; then
+    if [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ] || [ x"$OS" = x'chakra' ]; then
         find_zlib /usr/lib64/libz.so /usr/lib64
         if [ -e "/usr/lib64/libstdc++.so.6" ]; then
             export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib64/libstdc++.so.6"
@@ -155,7 +154,6 @@ elif [ x"$DF_ARCH" = x'64-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
     if [ -z "$ZLIB_PATH" ]; then
         dlog WARN "Could not find a 64-bit zlib"
     fi
-
 elif [ x"$DF_ARCH" = x'32-bit' ]; then
     find_zlib
 fi
