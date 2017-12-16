@@ -139,6 +139,23 @@ if [ x"$DF_ARCH" = x'32-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
         dlog WARN "Could not find a 32-bit zlib"
     fi
 
+elif [ x"$DF_ARCH" = x'64-bit' ] && [ x"$ARCH" = x'x86_64' ]; then
+    if [ x"$OS" = x'arch' ] || [ x"$OS" = x'antergos' ] || [ x"$OS" = x'manjarolinux' ]; then
+        find_zlib /usr/lib64/libz.so /usr/lib64
+        if [ -e "/usr/lib64/libstdc++.so.6" ]; then
+            export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}/usr/lib64/libstdc++.so.6"
+        else
+            dlog WARN "Could not find /usr/lib64/libstdc++.so.6"
+        fi
+    else
+        dlog "WARN" "64bit 'Dwarf_Fortress' on unhandled 64bit OS detected. If you get 'missing file' errors, please open an issue on Github: https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/issues."
+        find_zlib
+    fi
+
+    if [ -z "$ZLIB_PATH" ]; then
+        dlog WARN "Could not find a 64-bit zlib"
+    fi
+
 elif [ x"$DF_ARCH" = x'32-bit' ]; then
     find_zlib
 fi
