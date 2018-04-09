@@ -1,4 +1,4 @@
-* Lazy-Newb-Pack-Linux v0.44.05 x64
+* Lazy-Newb-Pack-Linux v0.44.09 x64
 A small package to get people started with Dwarf Fortress on linux. Please take time to check out the [Official thread](http://www.bay12forums.com/smf/index.php?topic=163211.0). There are a few help documents in the [Wiki](https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/wiki) if you should get stuck.
 
 If you like the work I've put into assembling this pack, please feel free to head over to my ** [Patreon](https://www.patreon.com/enay) ** page and buy me a coffee.  Or a beer.  Or a sammich.  I'm really not picky.
@@ -6,7 +6,7 @@ If you like the work I've put into assembling this pack, please feel free to hea
 ## Download Location
 The Linux LNP Can be downloaded at the below location:
 
-**[Dwarf Fortress File Depot](http://dffd.bay12games.com/file.php?id=13244)**
+**[Dwarf Fortress File Depot](http://dffd.bay12games.com/file.php?id=12762)**
 
 ## Usage Instructions
 Navigate to the extracted directory and run
@@ -25,15 +25,15 @@ When first launching a new version of the LNP, you'll be asked if you want to im
 ## Included With This Package:
 * [Pidgeot's PyLNP 0.13 Lazy Newb Pack Python interface](http://www.bay12forums.com/smf/index.php?topic=140808.0)
  * Utilities:
-     * [DFHack Linux V0.44.05-r2 (gcc 5.4.0)](http://www.bay12forums.com/smf/index.php?topic=139553.0)
-     * [TWBT 6.35](http://www.bay12forums.com/smf/index.php?topic=138754.0)
-     * [Dwarf Therapist v39.2.1](https://github.com/Dwarf-Therapist/Dwarf-Therapist) (**compiled with qt5.5.1**)
+     * [DFHack Linux V0.44.09-r1 (gcc 5.4.0)](http://www.bay12forums.com/smf/index.php?topic=139553.0)
+     * [TWBT 6.41](http://www.bay12forums.com/smf/index.php?topic=138754.0)
+     * [Dwarf Therapist v39.3.1](https://github.com/Dwarf-Therapist/Dwarf-Therapist) (**compiled with qt5.5.1**)
      * [Soundsense r2016-1](http://df.zweistein.cz/soundsense/)
      * [SoundCenSe GTK 1.4.2](http://www.bay12forums.com/smf/index.php?topic=159567.0) (**Requires Mono, go [HERE](http://www.mono-project.com/download/#download-lin) for install instructions**)
      * [qfconvert 2.04](http://www.joelpt.net/quickfort/) (**See ./LNP/about/qfconvert.md for usage instructions**)
      * [DF Announcement Filter 1.01](http://www.bay12forums.com/smf/index.php?topic=130030.0) (**Requires Java**)
-     * [Legends Browser 1.17](http://www.bay12forums.com/smf/index.php?topic=155307.0) (**Requires Java 8**)
-     * [Armok Vision 0.18.0](http://www.bay12forums.com/smf/index.php?topic=146473.0)
+     * [Legends Browser 1.17.1](http://www.bay12forums.com/smf/index.php?topic=155307.0) (**Requires Java 8**)
+     * [Armok Vision 0.19.1](http://www.bay12forums.com/smf/index.php?topic=146473.0)
  * Graphics (Now using [fricy's Updated tilesets](http://www.bay12forums.com/smf/index.php?topic=155882)!)
      * [16x16] ASCII
      * [16x16] [Afro](https://github.com/DFgraphics/Afro-Graphics)
@@ -75,17 +75,31 @@ See [the WIKI](https://github.com/Lazy-Newb-Pack/Lazy-Newb-Pack-Linux/wiki/Commo
 ***
 ## Linux LNP Changelog
 
+### Release notes for 0.44.09-r1 ( Apr 8, 2018 )
+A few updates have been pushed out the last few weeks, and I'm now getting caught up.
+
+#### Major changes over previous version
+* Updated Dwarf Fortress to 0.44.09
+* Updated DFHack to 0.44.09-r1
+* Updated TWBT to 6.41
+* Updated Armok Vision to 0.19.01
+* Updated Dwarf Therapist to 39.3.1
+* Updated Legends Browser to 1.17.1
+
+#### Minor changes over previous revision
+* Updated graphics packs
+
 ### Release notes for 0.44.05-r02 ( Mar 3, 2018 )
 DFHack 0.44.05-r2 has been released.
 
-### Major changes over previous revision
+#### Major changes over previous revision
 * Updated DFHack to 0.44.05-r2
 * Updated Dwarf Therapist to 39.2.1
 * Updated Legends Browser to 1.17
 * Updated TWBT to 6.35
 
 
-### Minor changes over previous revision
+#### Minor changes over previous revision
 * Updated graphics packs
 
 
