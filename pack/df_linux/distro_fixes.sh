@@ -23,12 +23,12 @@ dlog() {
 }
 
 find_zlib() {
-    for hint in "$@" /usr/lib32 /lib32 /usr/lib/i386-linux-gnu /usr/lib/mesa-diverted/i386-linux-gnu /usr/lib ; do
+    for hint in "$@" /usr/lib32 /lib32 /usr/lib/i386-linux-gnu /usr/lib/mesa-diverted/i386-linux-gnu /usr/lib /lib/x86_64-linux-gnu ; do
         if [ -f "$hint" ]; then
             ZLIB_PATH="$hint"
             break
         elif [ -d "$hint" ]; then
-            for file in libz.so libz.so.1 libz.so.1.2.5 libz.so.1.1.3 libz.dylib ; do
+            for file in libz.so libz.so.1 libz.so.1.2.5 libz.so.1.1.3 libz.so.1.2.8 libz.dylib ; do
                 if [ -f "$hint/$file" ]; then
                     ZLIB_PATH="$hint/$file"
                     break
