@@ -302,7 +302,7 @@ detectDE()
     elif [ x"$GNOME_DESKTOP_SESSION_ID" != x"" ]; then DE=gnome;
     elif `dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.GetNameOwner string:org.gnome.SessionManager > /dev/null 2>&1` ; then DE=gnome;
     elif ps -eo comm= | egrep xfce >/dev/null 2>&1; then DE=xfce;
-    elif [ x"$DESKTOP_SESSION" == x"LXDE" ]; then DE=lxde;
+    elif [ x"$DESKTOP_SESSION" = x"LXDE" ]; then DE=lxde;
     elif [ x"$MATE_DESKTOP_SESSION_ID" != x"" ]; then DE=mate;
     elif `dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.GetNameOwner string:org.mate.SessionManager > /dev/null 2>&1` ; then DE=mate;
     elif case $DESKTOP_STARTUP_ID in i3/*) true;; *) false;; esac then DE=i3;
