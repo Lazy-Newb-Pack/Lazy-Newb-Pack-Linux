@@ -32,7 +32,7 @@ if [ -x /sbin/getcap ] && [ -x /sbin/setcap ]; then
     dt_capabilities=${dt_capabilities:=0}
     if [ ${dt_capabilities} != "cap_sys_ptrace+eip" ]; then
         msg="Enable Dwarf Therapist to read from Dwarf Fortress memory"
-        xterm -e "echo $msg;sudo /sbin/setcap cap_sys_ptrace=eip LNP/utilities/dwarf_therapist/DwarfTherapist"
+        xterm -e "echo $msg;sudo /sbin/setcap cap_sys_ptrace=eip LNP/utilities/dwarf_therapist/dwarftherapist"
     fi
 else
     warn "Could not find /sbin/getcap and/or /sbin/setcap"
