@@ -42,4 +42,4 @@ else
 fi
 
 #run Lazy Newb Pack
-./PyLNP || warn "Failed to start PyLNP"
+./PyLNP $@ || warn "Failed to start PyLNP"
