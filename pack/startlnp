@@ -26,20 +26,5 @@ if [ ! -d df_linux ]; then
     echo "working directory: $(pwd)"
 fi
 
-gcap="$(whereis -b getcap | cut -f2 -d":" | tr -d " ")"
-scap="$(whereis -b setcap | cut -f2 -d":" | tr -d " ")"
-
-if [ -x $gcap ] && [ -x $scap ]; then
-    #Check whether Dwarf Therapist can read from DF memory:
-    dt_capabilities=$($gcap LNP/utilities/dwarf_therapist/dwarftherapist |cut -f2 -d"="|tr -d " ")
-    dt_capabilities=${dt_capabilities:=0}
-    if [ ${dt_capabilities} != "cap_sys_ptrace+eip" ]; then
-        msg="Enable Dwarf Therapist to read from Dwarf Fortress memory"
-        xterm -e "echo $msg;sudo $scap cap_sys_ptrace=eip LNP/utilities/dwarf_therapist/dwarftherapist"
-    fi
-else
-    warn "Could not find getcap and/or setcap"
-fi
-
 #run Lazy Newb Pack
 ./PyLNP "$@" || warn "Failed to start PyLNP"

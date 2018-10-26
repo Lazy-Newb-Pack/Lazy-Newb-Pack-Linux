@@ -170,6 +170,9 @@ if [ -n "$ZLIB_PATH" ]; then
     dlog INFO "Attempting to use zlib at $ZLIB_PATH"
 fi
 
+# Include set_ptracer_any.so in PRELOAD_LIB to remove the necessity to run setcap on the Dwarf Therapist executable
+export PRELOAD_LIB="${PRELOAD_LIB:+$PRELOAD_LIB:}./libs/set_ptracer_any.so"
+
 dlog "INFO" "PRELOAD_LIB: $PRELOAD_LIB"
 dlog "INFO" "LD_LIBRARY_PATH: $LD_LIBRARY_PATH"
 dlog "INFO" "Done"
